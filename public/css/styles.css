@@ -1,0 +1,16 @@
+.l4body {
+    margin-top: 60px;
+}
+
+.l4-form-error {
+    color: #a94442;
+}
+
+p.l4-form-error {
+    margin-bottom: 0px;
+}
+
+.welcome-user {
+    color: #FFF;
+    margin-top: 15px;
+}
