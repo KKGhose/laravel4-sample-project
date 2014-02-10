@@ -14,3 +14,26 @@ p.l4-form-error {
     color: #FFF;
     margin-top: 15px;
 }
+
+.no-padding {padding: 0px !important;}
+.no-margin {margin: 0px !important;}
+.white-background {background: #ffffff;}
+
+#freewall {
+    width: 100%;
+    margin: auto;
+}
+.brick {
+    width: 221.2px;
+}
+.info {
+    padding: 15px;
+    color: #333;
+}
+.brick img {
+    margin: 0px;
+    padding: 0px;
+    display: block;
+}
+
+.no-visibility {visibility: hidden;}

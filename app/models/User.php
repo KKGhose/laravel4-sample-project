@@ -19,12 +19,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
      */
     protected $hidden = array('password', 'email');
 
-    static function findAllUser()
-    {
-        $users = static::all();
-        return $users;
-    }
-
     static function saveUser($postData = array())
     {
         if(empty($postData)) return;
@@ -41,16 +35,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         $user->save();
 
         $insertedId = $user->id;
-    }
-
-    static function findById($id)
-    {
-        $data = static::where('id', '=', $id)->get();
-        if (count($data)) {
-            return $data[0];
-        } else {
-            return FALSE;
-        }
     }
 
     /**

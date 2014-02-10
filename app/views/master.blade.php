@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <title>
         @section("title")
-        {{$title}}
+            {{@$title}}
         @show
     </title>
     <meta name="keywords" content="your, awesome, keywords, here"/>
@@ -14,6 +14,7 @@
     {{HTML::style('bower_components/bootstrap/dist/css/bootstrap.css');}}
     {{HTML::style('bower_components/font-awesome/css/font-awesome.css');}}
     {{HTML::style('bower_components/smalot-bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css');}}
+    {{HTML::style('bower_components/freewall/example/css/pinterest-style.css');}}
     {{HTML::style('css/styles.css');}}
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -34,41 +35,36 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Bootstrap theme</a>
+            <a class="navbar-brand" href="/">Photo Gallery</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
                 @if (Auth::check())
-                <li><a href="profile">My Profile</a></li>
-                @endif
-                <li><a href="#about">About</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile
                         <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
+                        <li>{{ HTML::link('profile', 'View My Profile') }}</li>
                         <li class="divider"></li>
-                        <li class="dropdown-header">Nav header</li>
-                        <li><a href="#">Separated link</a></li>
-                        <li><a href="#">One more separated link</a></li>
+                        <li>{{ HTML::link('#', 'My Collections') }}</li>
                     </ul>
                 </li>
+                @endif
             </ul>
             <div class="navbar-collapse collapse pull-right">
                 @if (!Auth::check())
-                    <ul class="nav navbar-nav">
-                        <li>
-                            {{ HTML::link('register', 'Register') }}
-                        </li>
-                        <li>
-                            {{ HTML::link('login', 'Log In') }}
-                        </li>
-                    </ul>
+                <ul class="nav navbar-nav">
+                    <li>
+                        {{ HTML::link('register', 'Register') }}
+                    </li>
+                    <li>
+                        {{ HTML::link('login', 'Log In') }}
+                    </li>
+                </ul>
                 @else
-                    <div class="welcome-user">Hi, {{Auth::user()->name}} <a title="Logout" href="/logout"><i class="fa fa-sign-out icon-white"></i></a></div>
+                <div class="welcome-user">Hi, {{Auth::user()->name}} <a title="Logout" href="/logout"><i class="fa fa-sign-out icon-white"></i></a></div>
                 @endif
             </div>
         </div>
@@ -83,6 +79,7 @@
 {{HTML::script('bower_components/jquery/jquery.js');}}
 {{HTML::script('bower_components/bootstrap/dist/js/bootstrap.js');}}
 {{HTML::script('bower_components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js');}}
+{{HTML::script('bower_components/freewall/freewall.js');}}
 {{HTML::script('js/scripts.js');}}
 </body>
 </html>

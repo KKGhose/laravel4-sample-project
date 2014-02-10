@@ -58,9 +58,11 @@ class UserController extends \BaseController {
 	{
         if(!Auth::check()) return Redirect::to('login');
 
-		$users = User::all();
+        $data = array();
+
+		$data['user']          = User::find(Auth::user()->id);
         $this->layout->title   = "gallery :: user profile";
-		$this->layout->content = View::make('user.index');
+		$this->layout->content = View::make('user.index', $data);
 	}
 
     public function logout() {
