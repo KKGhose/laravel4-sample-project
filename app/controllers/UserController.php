@@ -27,7 +27,7 @@ class UserController extends \BaseController {
     public function postLogin()
     {
         if (Auth::attempt(array('email'=>Input::get('email'), 'password'=>Input::get('password')))) {
-            return Redirect::to('profile')->with('message', 'You are now logged in!');
+            return Redirect::to('/')->with('message', 'You are now logged in!');
         } else {
             return Redirect::to('login')
                 ->with('message', 'Your email/password combination was incorrect')
@@ -64,6 +64,22 @@ class UserController extends \BaseController {
         $this->layout->title   = "gallery :: user profile";
 		$this->layout->content = View::make('user.index', $data);
 	}
+
+    public function profilePhoto()
+    {
+        if(!Auth::check()) return Redirect::to('login');
+        $data = array();
+        $data['user'] = User::find(Auth::user()->id);
+        //var_dump($data);
+        return View::make('user.profile-photo', $data);
+    }
+
+    public function postProfilePhoto()
+    {
+        $this->layout = null;
+        echo '<pre>ss';
+        var_dump($_FILES);
+    }
 
     public function logout() {
         Auth::logout();

@@ -24,3 +24,5 @@ Route::post('register', array('uses' => 'UserController@postRegister'));
 Route::get('success',   array('uses' => 'UserController@success'));
 
 Route::get('profile', array('uses' => 'UserController@profile'));
+Route::get('profile-photo', array('uses' => 'UserController@profilePhoto'));
+Route::post('profile-photo', array('uses' => 'UserController@postProfilePhoto'));

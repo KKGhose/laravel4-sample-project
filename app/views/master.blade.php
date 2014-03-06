@@ -80,6 +80,7 @@
 {{HTML::script('bower_components/bootstrap/dist/js/bootstrap.js');}}
 {{HTML::script('bower_components/smalot-bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js');}}
 {{HTML::script('bower_components/freewall/freewall.js');}}
+{{HTML::script('bower_components/bootstrap-filestyle/src/bootstrap-filestyle.min.js');}}
 {{HTML::script('js/scripts.js');}}
 </body>
 </html>

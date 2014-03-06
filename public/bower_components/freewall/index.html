@@ -184,7 +184,7 @@
 					<h2>Features</h2>
 					<ul>
 						<li> Draggable support </li>
-						<li> Driection support </li>
+						<li> Direction support </li>
 						<li> Custom plugin</li>
 						<li> Responsive grid </li>
 						<li> Gaps control </li> 
@@ -353,8 +353,9 @@ wall.reset({
 								<li> onGapFound </li>
 								<li> onComplete </li>
 								<li> onResize </li>
-								<li> onStartSet </li>
-								<li> onSetBlock </li>
+								<li> onBlockReady </li>
+								<li> onBlockActive </li>
+								<li> onBlockFinish </li>
 							</ul>
 						</div>
 						<div class="read-more">View detail ...</div>
@@ -391,12 +392,16 @@ wall.reset({
 								</pre>
 							</li>
 							<li>
-								<h3> onStartSet </h3>
-								<div> Fire before block set into layout.</div>
+								<h3> onBlockReady </h3>
+								<div> Fire when block adjusted.</div>
 							</li>
 							<li>
-								<h3> onSetBlock </h3>
-								<div> Registry callback when arrange each block.</div>
+								<h3> onBlockActive </h3>
+								<div> Fire before block show or hide in the layout.</div>
+							</li>
+							<li>
+								<h3> onBlockFinish </h3>
+								<div> Fire when block finish show or hide in the layout.</div>
 							</li>
 						</ul>
 					</div>

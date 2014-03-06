@@ -32,11 +32,12 @@
             draggable: false,
             rightToLeft: false,
             bottomToTop: false,
-            onStartSet: function() {},
+            onBlockActive: function() {},
+            onBlockFinish: function() {},
+            onBlockReady: function() {},
             onGapFound: function() {},
             onComplete: function() {},
-            onResize: function() {},
-            onSetBlock: function() {}
+            onResize: function() {}
         },
         plugin: {},
         totalGrid: 1,
@@ -48,7 +49,7 @@
             var gutterX = runtime.gutterX;
             var gutterY = runtime.gutterY;
             var fixSize = parseInt($item.attr('data-fixSize'));
-            var blockId = runtime.lastId++ + '-' + this.totalGrid;
+            var blockId = runtime.lastId++ + '-' + runtime.totalGrid;
             
             //ignore dragging block;
             if ($item.hasClass('fw-float')) return;
@@ -136,6 +137,9 @@
             } else {
                 $item.attr("data-state", "move");
             }
+
+            setting.onBlockReady.call(item, block, setting);
+
             return fixPos ? null : block;
         },
         setBlock: function(block, setting) {
@@ -191,7 +195,7 @@
             // kill the old transition;
             self.setTransition(item, "");
             item.style.position = "absolute";
-            setting.onStartSet.call(item, block, setting);
+            setting.onBlockActive.call(item, block, setting);
             
             function action() {
                 // start to arrange;
@@ -240,7 +244,7 @@
 
                 runtime.length -= 1;
 
-                setting.onSetBlock.call(item, block, setting);
+                setting.onBlockFinish.call(item, block, setting);
 
                 runtime.length == 0 && setting.onComplete.call(item, block, setting);
             }
@@ -735,6 +739,7 @@
             currentArguments: []
         };
         setting.runtime = runtime;
+        runtime.totalGrid = layoutManager.totalGrid;
         
         // check browser support transition;
         var bodyStyle = document.body.style;
@@ -836,7 +841,6 @@
                     item.index = ++index;
                     if (block = layoutManager.loadBlock(item, setting)) {
                         activeBlock.push(block);
-                        klass.fireEvent('onBlockLoad', item, setting);
                     }
                 });
 
@@ -849,7 +853,6 @@
                 allBlock.each(function(index, item) {
                     setting.draggable && setDragable(item);
                     layoutManager.showBlock(item, setting);
-                    klass.fireEvent('onBlockShow', item, setting);
                 });
             },
             /*
@@ -914,7 +917,7 @@
                 name = name.toLowerCase();
                 if (events[name] && events[name].length) {
                     for (var i = 0; i < events[name].length; ++i) {
-                        events[name][i].call(object, setting);
+                        events[name][i].call(this, object, setting);
                     }
                 }
                 return this;
@@ -940,18 +943,15 @@
                     allBlock.data('active', 1);
                 }
 
-                klass.fireEvent('onGridReady', container, setting);
-
                 allBlock.each(function(index, item) {
                     var $item = $(item);
                     item.index = ++index;
                     if (block = layoutManager.loadBlock(item, setting)) {
                         $item.data("active") && activeBlock.push(block);
-                        klass.fireEvent('onBlockLoad', item, setting);
                     }
                 });
                 
-                klass.fireEvent('onGridLoad', container, setting);
+                klass.fireEvent('onGridReady', container, setting);
 
                 engine[setting.engine](activeBlock, setting);
                 
@@ -964,10 +964,7 @@
                 allBlock.each(function(index, item) {
                     setting.draggable && setDragable(item);
                     layoutManager.showBlock(item, setting);
-                    klass.fireEvent('onBlockShow', item, setting);
                 });
-
-                klass.fireEvent('onGridShow', container, setting);
             },
 
             fitWidth: function(width) {
@@ -990,18 +987,15 @@
                     allBlock.data('active', 1);
                 }
                 
-                klass.fireEvent('onGridReady', container, setting);
-
                 allBlock.each(function(index, item) {
                     var $item = $(item);
                     item.index = ++index;
                     if (block = layoutManager.loadBlock(item, setting)) {
                         $item.data("active") && activeBlock.push(block);
-                        klass.fireEvent('onBlockLoad', item, setting);
                     }
                 });
                 
-                klass.fireEvent('onGridLoad', container, setting);
+                klass.fireEvent('onGridReady', container, setting);
                 
                 engine[setting.engine](activeBlock, setting);
 
@@ -1014,10 +1008,7 @@
                 allBlock.each(function(index, item) {
                     setting.draggable && setDragable(item);
                     layoutManager.showBlock(item, setting);
-                    klass.fireEvent('onBlockShow', item, setting);
                 });
-
-                klass.fireEvent('onGridShow', container, setting);
             },
 
             fitZone: function(width, height) {
@@ -1041,18 +1032,15 @@
                     allBlock.data('active', 1);
                 }
                 
-                klass.fireEvent('onGridReady', container, setting);
-
                 allBlock.each(function(index, item) {
                     var $item = $(item);
                     item.index = ++index;
                     if (block = layoutManager.loadBlock(item, setting)) {
                         $item.data("active") && activeBlock.push(block);
-                        klass.fireEvent('onBlockLoad', item, setting);
                     }
                 });
 
-                klass.fireEvent('onGridLoad', container, setting);
+                klass.fireEvent('onGridReady', container, setting);
 
                 engine[setting.engine](activeBlock, setting);
                 
@@ -1065,10 +1053,7 @@
                 allBlock.each(function(index, item) {
                     setting.draggable && setDragable(item);
                     layoutManager.showBlock(item, setting);
-                    klass.fireEvent('onBlockShow', item, setting);
                 });
-
-                klass.fireEvent('onGridShow', container, setting);
             },
 
             /*
@@ -1184,30 +1169,19 @@
         });
     };
 
-
     /*
-    support create new plugin;
+    add default setting;
     example:
-        
-        freewall.createPlugin({
-            centering: function(setting, container) {
-                console.log(this);
-                console.log(setting);
-            }
-        }).addConfig({
+
+        freewall.addConfig({
             offsetLeft: 0
         });
     */
-    freewall.createPlugin = function(pluginData) {
-        // register new plugin;
-        $.extend(layoutManager.plugin, pluginData);
-        return {
-            addConfig: function(newConfig) {
-                // add default setting;
-                $.extend(layoutManager.defaultConfig, newConfig);    
-            }
-        }
+    freewall.addConfig = function(newConfig) {
+        // add default setting;
+        $.extend(layoutManager.defaultConfig, newConfig);    
     };
+    
 
     /*
     support create new arrange algorithm;
@@ -1223,6 +1197,22 @@
         // create new engine;
         $.extend(engine, engineData);
     };
+    
+    /*
+    support create new plugin;
+    example:
+        
+        freewall.createPlugin({
+            centering: function(setting, container) {
+                console.log(this);
+                console.log(setting);
+            }
+        })l
+    */
+    freewall.createPlugin = function(pluginData) {
+        // register new plugin;
+        $.extend(layoutManager.plugin, pluginData);
+    };
 
     /*
     support access helper function;
@@ -1231,6 +1221,7 @@
         freewall.getMethod('setBlock')(block, setting);
     */
     freewall.getMethod = function(method) {
+        // get helper method;
         return layoutManager[method];
     };
  

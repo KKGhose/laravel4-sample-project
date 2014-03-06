@@ -1,5 +1,5 @@
 @section('content')
-<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 no-padding no-margin">
+<div class="row no-padding no-margin">
     <div id="freewall" class="free-wall no-visibility">
         @for($i=1; $i<=50; $i++)
             <div class="brick">
@@ -12,4 +12,5 @@
         @endfor
     </div>
 </div>
+
 @stop
