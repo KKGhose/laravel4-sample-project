@@ -1,0 +1,1 @@
+/home/shaon/projects/laravel4-sample-project/app/views/user_roles/show.blade.php

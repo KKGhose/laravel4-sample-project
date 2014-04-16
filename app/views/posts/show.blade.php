@@ -1,0 +1,1 @@
+/home/shaon/projects/laravel4-sample-project/app/views/posts/show.blade.php
