@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-lg-6 col-sm-6 col-xs-12">
+    <div class="col-lg-6 col-sm-6 col-xs-12 margin-bottom-20px">
         <div class="alert alert-info">Current Avatar</div>
         <img width="160" class="img-responsive" src="images/avatar.jpg">
     </div>

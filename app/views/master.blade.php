@@ -55,16 +55,16 @@
             </ul>
             <div class="navbar-collapse collapse pull-right">
                 @if (!Auth::check())
-                <ul class="nav navbar-nav">
-                    <li>
-                        {{ HTML::link('register', 'Register') }}
-                    </li>
-                    <li>
-                        {{ HTML::link('login', 'Log In') }}
-                    </li>
-                </ul>
+                    <ul class="nav navbar-nav">
+                        <li>
+                            {{ HTML::link('register', 'Register') }}
+                        </li>
+                        <li>
+                            {{ HTML::link('login', 'Log In') }}
+                        </li>
+                    </ul>
                 @else
-                <div class="welcome-user">Hi, {{Auth::user()->name}} <a title="Logout" href="/logout"><i class="fa fa-sign-out icon-white"></i></a></div>
+                    <div class="welcome-user">Hi, {{Auth::user()->name}} <a title="Logout" href="/logout"><i class="fa fa-sign-out icon-white"></i></a></div>
                 @endif
             </div>
         </div>

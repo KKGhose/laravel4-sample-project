@@ -49,7 +49,7 @@ Log::useDailyFiles(storage_path().'/logs/'.$logFile);
 |
 */
 
-App::error(function($exception, $code)
+/*App::error(function($exception, $code)
 {
     switch ($code)
     {
@@ -65,7 +65,7 @@ App::error(function($exception, $code)
         default:
             return Response::view('errors.default', array(), $code);
     }
-});
+});*/
 /*
 |--------------------------------------------------------------------------
 | Maintenance Mode Handler

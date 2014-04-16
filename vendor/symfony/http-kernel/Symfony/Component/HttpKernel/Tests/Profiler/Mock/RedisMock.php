@@ -18,21 +18,14 @@ namespace Symfony\Component\HttpKernel\Tests\Profiler\Mock;
  */
 class RedisMock
 {
-
-    private $connected;
-    private $storage;
-
-    public function __construct()
-    {
-        $this->connected = false;
-        $this->storage = array();
-    }
+    private $connected = false;
+    private $storage = array();
 
     /**
      * Add a server to connection pool
      *
      * @param string  $host
-     * @param integer $port
+     * @param int     $port
      * @param float   $timeout
      *
      * @return boolean
@@ -51,8 +44,8 @@ class RedisMock
     /**
      * Set client option.
      *
-     * @param integer $name
-     * @param integer $value
+     * @param int     $name
+     * @param int     $value
      *
      * @return boolean
      */
@@ -85,7 +78,7 @@ class RedisMock
      * Store data at the server with expiration time.
      *
      * @param string  $key
-     * @param integer $ttl
+     * @param int     $ttl
      * @param mixed   $value
      *
      * @return boolean
@@ -105,7 +98,7 @@ class RedisMock
      * Sets an expiration time on an item.
      *
      * @param string  $key
-     * @param integer $ttl
+     * @param int     $ttl
      *
      * @return boolean
      */

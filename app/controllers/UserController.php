@@ -8,6 +8,15 @@ class UserController extends \BaseController {
 	{
         $this->layout->title   = "gallery :: user home";
 		$this->layout->content = View::make('user.index');
+
+        return Country::find(1)->posts;
+
+        return Country::find(1)->posts;
+
+        return User::find(7)->posts;
+        echo '<pre>';
+        print_r($res);
+        die;
 	}
 
     public function login()
@@ -79,6 +88,19 @@ class UserController extends \BaseController {
         $this->layout = null;
         echo '<pre>ss';
         var_dump($_FILES);
+        die;
+        $file = Input::file('avatar');
+
+        $destinationPath = 'uploads/'.str_random(8);
+        $filename = $file->getClientOriginalName();
+        //$extension =$file->getClientOriginalExtension();
+        $upload_success = Input::file('file')->move($destinationPath, $filename);
+
+        if( $upload_success ) {
+            return Response::json('success', 200);
+        } else {
+            return Response::json('error', 400);
+        }
     }
 
     public function logout() {

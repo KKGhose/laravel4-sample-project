@@ -11,13 +11,16 @@
 |
 */
 
+Route::resource('posts', 'PostsController');
+Route::resource('task.comments', 'CommentsController');
+
 Route::get('/', 'HomeController@index');
 
 Route::get('user', array('uses' => 'UserController@index'));
 
 Route::get('login',   array('uses' => 'UserController@login'));
 Route::post('login',  array('uses' => 'UserController@postLogin'));
-Route::get('logout',   array('uses' => 'UserController@logout'));
+Route::get('logout',  array('uses' => 'UserController@logout'));
 
 Route::get('register', array('uses' => 'UserController@register'));
 Route::post('register', array('uses' => 'UserController@postRegister'));

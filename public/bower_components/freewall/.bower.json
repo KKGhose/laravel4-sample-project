@@ -1,11 +1,11 @@
 {
   "name": "freewall",
   "homepage": "https://github.com/kombai/freewall",
-  "_release": "8ee56c4bee",
+  "_release": "ba7b17c398",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "8ee56c4bee386a996d06674c524f90eb3b48c9a9"
+    "commit": "ba7b17c3985a4cb25ad9c43f1c17f7e5301eefbd"
   },
   "_source": "git@github.com:kombai/freewall.git",
   "_target": "*",

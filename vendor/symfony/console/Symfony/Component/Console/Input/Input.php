@@ -24,9 +24,12 @@ namespace Symfony\Component\Console\Input;
  */
 abstract class Input implements InputInterface
 {
+    /**
+     * @var InputDefinition
+     */
     protected $definition;
-    protected $options;
-    protected $arguments;
+    protected $options = array();
+    protected $arguments = array();
     protected $interactive = true;
 
     /**
@@ -37,8 +40,6 @@ abstract class Input implements InputInterface
     public function __construct(InputDefinition $definition = null)
     {
         if (null === $definition) {
-            $this->arguments = array();
-            $this->options = array();
             $this->definition = new InputDefinition();
         } else {
             $this->bind($definition);
@@ -90,11 +91,11 @@ abstract class Input implements InputInterface
     /**
      * Sets the input interactivity.
      *
-     * @param Boolean $interactive If the input should be interactive
+     * @param bool    $interactive If the input should be interactive
      */
     public function setInteractive($interactive)
     {
-        $this->interactive = (Boolean) $interactive;
+        $this->interactive = (bool) $interactive;
     }
 
     /**
@@ -145,7 +146,7 @@ abstract class Input implements InputInterface
     /**
      * Returns true if an InputArgument object exists by name or position.
      *
-     * @param string|integer $name The InputArgument name or position
+     * @param string|int     $name The InputArgument name or position
      *
      * @return Boolean true if the InputArgument object exists, false otherwise
      */
@@ -185,8 +186,8 @@ abstract class Input implements InputInterface
     /**
      * Sets an option value by name.
      *
-     * @param string $name  The option name
-     * @param string $value The option value
+     * @param string         $name  The option name
+     * @param string|bool    $value The option value
      *
      * @throws \InvalidArgumentException When option given doesn't exist
      */

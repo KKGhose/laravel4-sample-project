@@ -31,7 +31,7 @@ class Shell
     private $history;
     private $output;
     private $hasReadline;
-    private $processIsolation;
+    private $processIsolation = false;
 
     /**
      * Constructor.
@@ -47,7 +47,6 @@ class Shell
         $this->application = $application;
         $this->history = getenv('HOME').'/.history_'.$application->getName();
         $this->output = new ConsoleOutput();
-        $this->processIsolation = false;
     }
 
     /**
@@ -220,7 +219,7 @@ EOF;
 
     public function setProcessIsolation($processIsolation)
     {
-        $this->processIsolation = (Boolean) $processIsolation;
+        $this->processIsolation = (bool) $processIsolation;
 
         if ($this->processIsolation && !class_exists('Symfony\\Component\\Process\\Process')) {
             throw new \RuntimeException('Unable to isolate processes as the Symfony Process Component is not installed.');

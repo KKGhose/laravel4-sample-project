@@ -16,21 +16,21 @@ class Encrypter {
 	 *
 	 * @var string
 	 */
-	protected $cipher = 'rijndael-256';
+	protected $cipher = MCRYPT_RIJNDAEL_128;
 
 	/**
 	 * The mode used for encryption.
 	 *
 	 * @var string
 	 */
-	protected $mode = 'cbc';
+	protected $mode = MCRYPT_MODE_CBC;
 
 	/**
 	 * The block size of the cipher.
 	 *
 	 * @var int
 	 */
-	protected $block = 32;
+	protected $block = 16;
 
 	/**
 	 * Create a new encrypter instance.
@@ -114,6 +114,8 @@ class Encrypter {
 	 *
 	 * @param  string  $payload
 	 * @return array
+	 *
+	 * @throws DecryptException
 	 */
 	protected function getJsonPayload($payload)
 	{
@@ -122,7 +124,7 @@ class Encrypter {
 		// If the payload is not valid JSON or does not have the proper keys set we will
 		// assume it is invalid and bail out of the routine since we will not be able
 		// to decrypt the given value. We'll also check the MAC for this encryption.
-		if ( ! $payload or $this->invalidPayload($payload))
+		if ( ! $payload || $this->invalidPayload($payload))
 		{
 			throw new DecryptException("Invalid data.");
 		}
@@ -206,7 +208,7 @@ class Encrypter {
 	 */
 	protected function invalidPayload($data)
 	{
-		return ! is_array($data) or ! isset($data['iv']) or ! isset($data['value']) or ! isset($data['mac']);
+		return ! is_array($data) || ! isset($data['iv']) || ! isset($data['value']) || ! isset($data['mac']);
 	}
 
 	/**
@@ -255,6 +257,8 @@ class Encrypter {
 	public function setCipher($cipher)
 	{
 		$this->cipher = $cipher;
+
+		$this->updateBlockSize();
 	}
 
 	/**
@@ -266,6 +270,18 @@ class Encrypter {
 	public function setMode($mode)
 	{
 		$this->mode = $mode;
+
+		$this->updateBlockSize();
+	}
+
+	/**
+	 * Update the block size for the current cipher and mode.
+	 *
+	 * @return void
+	 */
+	protected function updateBlockSize()
+	{
+		$this->block = mcrypt_get_iv_size($this->cipher, $this->mode);
 	}
 
 }

@@ -18,19 +18,13 @@ namespace Symfony\Component\HttpKernel\Tests\Profiler\Mock;
  */
 class MemcachedMock
 {
-    private $connected;
-    private $storage;
-
-    public function __construct()
-    {
-        $this->connected = false;
-        $this->storage = array();
-    }
+    private $connected = false;
+    private $storage = array();
 
     /**
      * Set a Memcached option
      *
-     * @param integer $option
+     * @param int     $option
      * @param mixed   $value
      *
      * @return boolean
@@ -44,8 +38,8 @@ class MemcachedMock
      * Add a memcached server to connection pool
      *
      * @param string  $host
-     * @param integer $port
-     * @param integer $weight
+     * @param int     $port
+     * @param int     $weight
      *
      * @return boolean
      */
@@ -65,7 +59,7 @@ class MemcachedMock
      *
      * @param string  $key
      * @param mixed   $value
-     * @param integer $expiration
+     * @param int     $expiration
      *
      * @return boolean
      */
@@ -89,7 +83,7 @@ class MemcachedMock
      *
      * @param string  $key
      * @param mixed   $value
-     * @param integer $expiration
+     * @param int     $expiration
      *
      * @return boolean
      */
@@ -109,7 +103,7 @@ class MemcachedMock
      *
      * @param string  $key
      * @param mixed   $value
-     * @param integer $expiration
+     * @param int     $expiration
      *
      * @return boolean
      */
