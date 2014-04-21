@@ -11,6 +11,8 @@
 			"app/commands",
 			"app/controllers",
 			"app/models",
+            "app/facades",
+            "app/services",
 			"app/database/migrations",
 			"app/database/seeds",
 			"app/tests/TestCase.php"

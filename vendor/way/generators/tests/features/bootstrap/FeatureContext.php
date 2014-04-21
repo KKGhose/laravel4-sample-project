@@ -29,7 +29,7 @@ class FeatureContext extends BehatContext
      */
     public static function bootstrapLaravel()
     {
-        require __DIR__.'/../../../../../../vendor/autoload.php';
+        require __DIR__ . '/../../../../../../vendor/autoload.php';
         require __DIR__.'/../../../../../../bootstrap/start.php';
     }
 

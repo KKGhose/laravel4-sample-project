@@ -21,7 +21,7 @@
                 </tr>
                 <tr>
                     <th>Role</th>
-                    <td>{{ ucfirst($user->role) }}</td>
+                    <td>{{ $count }}</td>
                 </tr>
             </table>
         </div>

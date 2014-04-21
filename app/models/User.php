@@ -29,6 +29,17 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return $this->belongsToMany('Role');
     }
 
+    public function getNameAttribute($value)
+    {
+        return ucwords($value);
+    }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = strtolower($value);
+    }
+
+
     function saveUser($postData = array())
     {
         if(empty($postData)) return;
@@ -44,7 +55,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
         $user->save();
 
-        $insertedId = $user->id;
+        return $user->id;
     }
 
     /**
@@ -75,6 +86,21 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     public function getReminderEmail()
     {
         return $this->email;
+    }
+
+    public function getRememberToken()
+    {
+        return $this->remember_token;
+    }
+
+    public function setRememberToken($value)
+    {
+        $this->remember_token = $value;
+    }
+
+    public function getRememberTokenName()
+    {
+        return 'remember_token';
     }
 
 }

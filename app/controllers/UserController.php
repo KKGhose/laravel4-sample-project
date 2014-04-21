@@ -7,16 +7,9 @@ class UserController extends \BaseController {
 	public function index()
 	{
         $this->layout->title   = "gallery :: user home";
-		$this->layout->content = View::make('user.index');
-
-        return Country::find(1)->posts;
-
-        return Country::find(1)->posts;
-
-        return User::find(7)->posts;
-        echo '<pre>';
-        print_r($res);
-        die;
+        $this->layout->content = View::make('user.index');
+        Payment::run(); die;
+        //var_dump(Payment::process());die;
 	}
 
     public function login()

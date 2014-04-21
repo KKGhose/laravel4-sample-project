@@ -154,7 +154,7 @@ class GeneratorsServiceProvider extends ServiceProvider {
     /**
      * register command for publish templates
      */
-    public function registerpublisher()
+    public function registerPublisher()
     {
         $this->app['generate.publish-templates'] = $this->app->share(function($app)
         {

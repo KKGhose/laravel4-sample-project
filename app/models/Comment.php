@@ -1,5 +1,19 @@
 <?php
 
 class Comment extends \Eloquent {
-	protected $fillable = [];
+	protected $fillable = ['body'];
+
+    protected $touches = array('post');
+
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'comments';
+
+    public function post()
+    {
+        return $this->belongsTo('Post');
+    }
 }

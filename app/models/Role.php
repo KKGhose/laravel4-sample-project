@@ -1,7 +1,7 @@
 <?php
 
 class Role extends \Eloquent {
-	protected $fillable = [];
+	protected $fillable = ['name'];
 
     /**
      * The database table used by the model.
